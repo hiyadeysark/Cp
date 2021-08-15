@@ -58,7 +58,39 @@ void insert(numarray* arr, int pos, int val) {
 	arr->num[pos-1] = val;
 }
 
-int search(numarray *arr, int key){
+void sort(numarray* arr)
+{
+	//using insertion sort
+	
+	int len = arr->len, key;
+    for (int i=1; i<len; i++)
+    {
+        key = arr->num[i];
+        int j = i-1;
+        while (j >= 0 && arr->num[j] > key)
+        {
+            arr->num[j+1] = arr->num[j];
+            j = j-1;
+        }
+        arr->num[j+1] = key;
+    }
+}
+
+int linearsearch(numarray *arr, int key)
+{
+	//using linear search
+	
+	for(int i = 0; i < arr->len; i++ )
+		if(arr->num[i] == key)
+		{
+			return i;
+			break;
+		}
+		else
+			return -1;
+}
+
+int binarysearch(numarray *arr, int key){
 	//binary search
 	
 	int min = 0;
@@ -185,7 +217,7 @@ int main(){
 				printf("\n\nEnter the details:\nValue of the element to search: ");
 				scanf("%d", &val);
 				
-				pos = search(&arr, val);
+				pos = linearsearch(&arr, val);
 				if(pos == -1)
 					printf("\nElement not in array");
 				else 
